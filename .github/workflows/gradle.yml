@@ -1,0 +1,41 @@
+# This workflow will build a Java project with Gradle
+# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-gradle
+
+name: Java CI with Gradle
+
+on:
+  workflow_dispatch:
+    # Inputs the workflow accepts.
+    inputs:
+      ref:
+        # Friendly description to be shown in the UI instead of 'name'
+        description: 'Person to greet'
+        # Default value if no value is explicitly provided
+        default: 'main'
+        # Input has to be provided for the workflow to run
+        required: false
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up JDK 11
+      uses: actions/setup-java@v2
+      with:
+        java-version: '11'
+        distribution: 'adopt'
+        
+    - name: Checkout Lucene
+      uses: actions/checkout@v2
+      with:
+        repository: 'apache/lucene'
+        path: lucene
+        ref: ${{ github.event.inputs.name }}
+
+    - name: Publish Lucene
+      working-directory: ./lucene
+      run: ./gradlew -I ../${{ env.GITHUB_WORKSPACE }}/init.gradle  publishUnsignedJarsPublicationToGitHubPackagesRepository -Pversion.suffix=snapshot-"$(git rev-parse --short HEAD)"
+
