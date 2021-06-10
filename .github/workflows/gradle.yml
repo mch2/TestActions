@@ -43,5 +43,5 @@ jobs:
       
     - name: Publish Lucene
       working-directory: ./lucene
-      run: ./gradlew -I ${{ env.GITHUB_WORKSPACE }}/init.gradle  publishUnsignedJarsPublicationToGitHubPackagesRepository -Pversion.suffix=snapshot-${{ steps.version.outputs.REVISION }}
+      run: ./gradlew -I ../${{ env.GITHUB_WORKSPACE }}/init.gradle  publishUnsignedJarsPublicationToGitHubPackagesRepository -Pversion.suffix=snapshot-${{ steps.version.outputs.REVISION }}
 
