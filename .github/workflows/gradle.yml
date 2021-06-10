@@ -35,7 +35,10 @@ jobs:
         path: lucene
         ref: ${{ github.event.inputs.name }}
 
-    - name: Publish Lucene
+    - name: Set hash
       working-directory: ./lucene
-      run: ./gradlew -I ../${{ env.GITHUB_WORKSPACE }}/init.gradle  publishUnsignedJarsPublicationToGitHubPackagesRepository -Pversion.suffix=snapshot-"$(git rev-parse --short HEAD)"
+      run: echo ::set-env name=REVISION::$(git rev-parse --short HEAD)
+      
+    - name: Publish Lucene
+      run: ./gradlew -I ${{ env.GITHUB_WORKSPACE }}/init.gradle  publishUnsignedJarsPublicationToGitHubPackagesRepository -Pversion.suffix=snapshot-${{ env.REVISION }}
 
