@@ -37,8 +37,8 @@ jobs:
 
     - name: Set hash
       working-directory: ./lucene
-      run: echo ::set-env name=REVISION::$(git rev-parse --short HEAD)
+      run: echo ::set-output name=REVISION::$(git rev-parse --short HEAD)
       
     - name: Publish Lucene
-      run: ./gradlew -I ${{ env.GITHUB_WORKSPACE }}/init.gradle  publishUnsignedJarsPublicationToGitHubPackagesRepository -Pversion.suffix=snapshot-${{ env.REVISION }}
+      run: ./gradlew -I ${{ env.GITHUB_WORKSPACE }}/init.gradle  publishUnsignedJarsPublicationToGitHubPackagesRepository -Pversion.suffix=snapshot-${{ steps.version.outputs.REVISION }}
 
