@@ -4,7 +4,7 @@ allprojects {
             repositories {
                 maven {
                     name = "GitHubPackages"
-                    url = uri("https://maven.pkg.github.com/mch2/snapshots")
+                    url = uri("https://maven.pkg.github.com/mch2/TestActions")
                     credentials {
                         username = project.findProperty("gpr.user") ?: System.getenv("USERNAME")
                         password = project.findProperty("gpr.key") ?: System.getenv("TOKEN")
