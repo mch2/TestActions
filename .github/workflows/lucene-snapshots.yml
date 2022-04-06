@@ -28,7 +28,7 @@ jobs:
       with:
         repository: 'apache/lucene'
         path: lucene
-        ref: ${{ github.event.inputs.name }}
+        ref: ${{ github.event.inputs.ref }}
 
     - name: Set hash
       working-directory: ./lucene
