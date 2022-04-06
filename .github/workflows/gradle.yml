@@ -8,13 +8,8 @@ on:
     # Inputs the workflow accepts.
     inputs:
       ref:
-        # Friendly description to be shown in the UI instead of 'name'
-        description: 'Person to greet'
-        # Default value if no value is explicitly provided
         default: 'main'
-        # Input has to be provided for the workflow to run
-        required: false
-
+        
 jobs:
   build:
 
@@ -43,8 +38,15 @@ jobs:
       
     - name: Publish Lucene
       working-directory: ./lucene
-      run: ./gradlew -I ../${{ env.GITHUB_WORKSPACE }}/init.gradle  publishUnsignedJarsPublicationToGitHubPackagesRepository -Pversion.suffix=snapshot-${{ steps.version.outputs.REVISION }}
-      env:
-        USERNAME: ${{ github.actor }}
-        TOKEN: ${{ secrets.GITHUB_TOKEN }}    
+      run: ./gradlew publishJarsPublicationToMavenLocal -Pversion.suffix=snapshot-${{ steps.version.outputs.REVISION }}
+      
+    - name: Configure AWS credentials from Test account
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        role-to-assume: arn:aws:iam::126083459307:role/OIDC-Role-LX83U8ZDGV58
+        aws-region: us-west-2
+
+    - name: Copy files to the test website with the AWS CLI
+      run: |
+        aws s3 cp ~/.m2/repository/org/apache/lucene/ s3://test.handalm/snapshots/lucene/org/apache/lucene/  --recursive --no-progress
 
