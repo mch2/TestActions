@@ -47,10 +47,10 @@ jobs:
     - name: Configure AWS credentials from Test account
       uses: aws-actions/configure-aws-credentials@v1
       with:
-        role-to-assume: arn:aws:iam::126083459307:role/GitHubActionsRelease
+        role-to-assume: ${{ secrets.LUCENE_SNAPSHOTS_ROLE }}
         aws-region: us-west-2
 
     - name: Copy files to the test website with the AWS CLI
       run: |
-        aws s3 cp ~/.m2/repository/org/apache/lucene/ s3://test.handalm/snapshots/lucene/org/apache/lucene/  --recursive --no-progress
+        aws s3 cp ~/.m2/repository/org/apache/lucene/ s3://${{ secrets.LUCENE_SNAPSHOTS_BUCKET }}/snapshots/lucene/org/apache/lucene/  --recursive --no-progress
 
