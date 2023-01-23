@@ -21,6 +21,6 @@ jobs:
             WORKFLOW_URL: testurl
             PR_FROM_SHA: commitId
           with:
-            filename: .github/failed_check.md
+            filename: .github/ISSUE_TEMPLATE/failed_check.md
             
 
