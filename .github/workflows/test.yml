@@ -8,11 +8,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Test
-      - uses: actions/checkout@v2
-      - uses: dblock/create-a-github-issue@v3
+        uses: dblock/create-a-github-issue@v3
          env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           WORKFLOW_URL: testurl
           PR_FROM_SHA: commitId
             with:
               filename: .github/ISSUE_TEMPLATE/failed_check.md
+              
+      - name: Step2
+              
