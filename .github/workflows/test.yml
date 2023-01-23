@@ -15,16 +15,12 @@ jobs:
     runs-on: 'ubuntu-18.04'
     steps:
         - name: Create Issue On Push Failure
-          run: |
-            echo ### Gradle Check (Jenkins) Run Failed. > failure.md
-            echo * **URL:** ${{ env.workflow_url }} >> failure.md
-            echo * **CommitID:** ${{ env.pr_from_sha }}  >> failure.md
-
-        - name: Create Issue On Push Failure
-          uses: peter-evans/create-issue-from-file@v4
+        - uses: dblock/create-a-github-issue@v3
+          env:
+            WORKFLOW_URL: testurl
+            PR_FROM_SHA: commitId
           with:
+            filename: .github/ISSUE_TEMPLATE/failed_check.md
             title: Post-Merge Gradle Check Failure.
-            content-filepath: ./failure.md
-            labels: test-failure
             
 
