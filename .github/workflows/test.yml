@@ -11,19 +11,14 @@ jobs:
         uses: actions/checkout@v2
         with:
           fetch-depth: 0  
-      - name: Dump GitHub context
-        id: github_context_step
-        run: echo '${{ toJSON(github) }}'
-      - name: Dump job context
-        run: echo '${{ toJSON(job) }}'
-      - name: Dump steps context
-        run: echo '${{ toJSON(steps) }}'
       - name: Test
         uses: dblock/create-a-github-issue@v3
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           WORKFLOW_URL: testurl
           PR_FROM_SHA: commitId
+          PR_USER: ${{ github.event.push.head_commit.author.username }}
+          PUSH_USER: ${{ github.event.push.pusher.username }}
         with:
           filename: .github/ISSUE_TEMPLATE/failed_check.md
               
