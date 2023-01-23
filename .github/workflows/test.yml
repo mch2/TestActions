@@ -16,17 +16,15 @@ jobs:
     steps:
         - name: Create Issue On Push Failure
           run: |
-            touch ./failure.md
-            echo ### Gradle Check (Jenkins) Run Completed with: >> ./failure.md
-            echo * **RESULT:** ${{ env.result }} :x: ${{ env.test_failures }} >> ./failure.md
-            echo * **URL:** ${{ env.workflow_url }} >> ./failure.md
-            echo * **CommitID:** ${{ env.pr_from_sha }}  >> ./failure.md
+            echo ### Gradle Check (Jenkins) Run Failed. > failure.md
+            echo * **URL:** ${{ env.workflow_url }} >> failure.md
+            echo * **CommitID:** ${{ env.pr_from_sha }}  >> failure.md
 
         - name: Create Issue On Push Failure
           uses: peter-evans/create-issue-from-file@v4
           with:
             title: Post-Merge Gradle Check Failure.
             content-filepath: ./failure.md
-            labels: test-failur
+            labels: test-failure
             
 
