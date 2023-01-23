@@ -1,8 +1,6 @@
 ---
 name: Failed GC
 title: Gradle Check Failed Post Merge.
-assignees: 
-  - {{ github.event.push.head_commit.author.username }}
 labels: test-failure
 about: GC Failure autocut
 ---
