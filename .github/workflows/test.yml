@@ -15,6 +15,7 @@ jobs:
     runs-on: 'ubuntu-18.04'
     steps:
         - name: Create Issue On Push Failure
+        - uses: actions/checkout@v2
         - uses: dblock/create-a-github-issue@v3
           env:
             WORKFLOW_URL: testurl
