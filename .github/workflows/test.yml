@@ -14,13 +14,19 @@ jobs:
   test-build:
     runs-on: 'ubuntu-18.04'
     steps:
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-west-2
-      - name: Run CodeBuild
-        uses: aws-actions/aws-codebuild-run-build@v1.0.3
-        with:
-          project-name: test-github
+        - name: Create Issue On Push Failure
+          run: |
+            touch ./failure.md
+            echo ### Gradle Check (Jenkins) Run Completed with: >> ./failure.md
+            echo * **RESULT:** ${{ env.result }} :x: ${{ env.test_failures }} >> ./failure.md
+            echo * **URL:** ${{ env.workflow_url }} >> ./failure.md
+            echo * **CommitID:** ${{ env.pr_from_sha }}  >> ./failure.md
+
+        - name: Create Issue On Push Failure
+          uses: peter-evans/create-issue-from-file@v4
+          with:
+            title: Post-Merge Gradle Check Failure.
+            content-filepath: ./failure.md
+            labels: test-failur
+            
+
