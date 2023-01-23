@@ -6,7 +6,7 @@ about: GC Failure autocut
 ---
 
 Gradle check failure.
-Author: {{ github.event.push.head_commit.author.username }}
-pusher: {{ github.event.push.pusher.username }}
+Author: {{ env.PR_USER }}
+pusher: {{ env.PUSH_USR }}
 PR: {{ env.WORKFLOW_URL }} 
 CommitId: {{ env.PR_FROM_SHA }}
