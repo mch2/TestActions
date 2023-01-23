@@ -1,6 +1,8 @@
 ---
+name: Failed GC
 title: Gradle Check Failed Post Merge.
-assignees: {{ github.event.push.sender }}
+assignees: 
+  - {{ github.event.push.sender }}
 labels: test-failure
 ---
 
