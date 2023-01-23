@@ -10,7 +10,6 @@ jobs:
       - uses: actions/checkout@v2
       - uses: dblock/create-a-github-issue@v3
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           WORKFLOW_URL: testurl
           PR_FROM_SHA: commitId
         with:
