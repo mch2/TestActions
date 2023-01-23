@@ -9,12 +9,10 @@ jobs:
     steps:
       - name: Test
         uses: dblock/create-a-github-issue@v3
-         env:
+        env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           WORKFLOW_URL: testurl
           PR_FROM_SHA: commitId
-            with:
-              filename: .github/ISSUE_TEMPLATE/failed_check.md
-              
-      - name: Step2
+        with:
+          filename: .github/ISSUE_TEMPLATE/failed_check.md
               
