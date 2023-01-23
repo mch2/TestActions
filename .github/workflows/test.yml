@@ -7,6 +7,10 @@ jobs:
   stuff:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout the repo
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0  
       - name: Test
         uses: dblock/create-a-github-issue@v3
         env:
