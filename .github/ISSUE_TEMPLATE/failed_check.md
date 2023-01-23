@@ -4,6 +4,7 @@ title: Gradle Check Failed Post Merge.
 assignees: 
   - {{ github.event.push.sender }}
 labels: test-failure
+about: GC Failure autocut
 ---
 
 Gradle check failure.
