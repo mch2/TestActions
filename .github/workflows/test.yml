@@ -7,9 +7,12 @@ jobs:
   stuff:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: dblock/create-a-github-issue@v3
+     - name: Create an issue
+       if: success()
+     - uses: actions/checkout@v2
+     - uses: dblock/create-a-github-issue@v3
         env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           WORKFLOW_URL: testurl
           PR_FROM_SHA: commitId
         with:
