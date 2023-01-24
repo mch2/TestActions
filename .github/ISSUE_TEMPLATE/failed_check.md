@@ -1,7 +1,6 @@
 ---
 name: Failed GC
 title: Gradle Check Failed Post Merge.
-assignees: {{ env.ASSIGNEES }}
 labels: test-failure
 about: GC Failure autocut
 ---
