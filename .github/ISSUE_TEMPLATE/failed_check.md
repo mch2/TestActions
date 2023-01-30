@@ -1,7 +1,7 @@
 ---
 name: Failed GC
 title: Gradle Check Failed Post Merge.
-labels: '>test-failure', bug
+labels: ">test-failure", bug
 about: GC Failure autocut
 ---
 
