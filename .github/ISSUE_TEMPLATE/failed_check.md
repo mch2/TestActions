@@ -1,6 +1,6 @@
 ---
 name: Failed GC
-title: '[AUTOCUT] Failed check on push to {{ env.branch }}'
+title: '[AUTOCUT] Failed check on push to {{ env.BRANCH }}'
 labels: '>test-failure, bug'
 about: GC Failure autocut
 ---
