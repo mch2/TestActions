@@ -20,6 +20,7 @@ jobs:
         run: |
           branch_name=$(git rev-parse --abbrev-ref HEAD)
           echo "branch_name=$branch_name" >> $GITHUB_ENV
+          echo "pr_title=Push trigger $branch_name $ref_id $repo_url" >> $GITHUB_ENV
       - name: Test
         uses: dblock/create-a-github-issue@v3
         env:
@@ -28,7 +29,7 @@ jobs:
           PR_FROM_SHA: commitId
           PR_USER: '${{ github.event.head_commit.author.username }}'
           PUSH_USER: '${{ github.triggering_actor }}'
-          BRANCH: '${{ env.branch_name }}'
+          BRANCH: '${{ env.pr_title }}'
         with:
           assignees: ${{ github.event.head_commit.author.username }}, ${{ github.triggering_actor }}
           filename: .github/ISSUE_TEMPLATE/failed_check.md
