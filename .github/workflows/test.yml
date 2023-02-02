@@ -24,8 +24,8 @@ jobs:
           PR_FROM_SHA: commitId
           PR_USER: '${{ github.event.head_commit.author.username }}'
           PUSH_USER: '${{ github.triggering_actor }}'
+          BRANCH: $(git rev-parse --abbrev-ref HEAD)
         with:
-          title: Failed check on push to $(git rev-parse --abbrev-ref HEAD)
           assignees: ${{ github.event.head_commit.author.username }}, ${{ github.triggering_actor }}
           filename: .github/ISSUE_TEMPLATE/failed_check.md
               
