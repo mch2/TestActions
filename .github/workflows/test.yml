@@ -28,7 +28,7 @@ jobs:
           PR_FROM_SHA: commitId
           PR_USER: '${{ github.event.head_commit.author.username }}'
           PUSH_USER: '${{ github.triggering_actor }}'
-          BRANCH: '{{ env.branch_name }}'
+          BRANCH: '${{ env.branch_name }}'
         with:
           assignees: ${{ github.event.head_commit.author.username }}, ${{ github.triggering_actor }}
           filename: .github/ISSUE_TEMPLATE/failed_check.md
