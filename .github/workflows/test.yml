@@ -11,6 +11,11 @@ jobs:
         uses: actions/checkout@v2
         with:
           fetch-depth: 0  
+      - name: Dump GitHub context
+        id: github_context_step
+        run: echo '${{ toJSON(github) }}'
+      - name: Dump job context
+        run: echo '${{ toJSON(job) }}'    
       - name: Test
         uses: dblock/create-a-github-issue@v3
         env:
